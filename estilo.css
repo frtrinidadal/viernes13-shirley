@@ -1,0 +1,311 @@
+:root {
+  --bg-noche: #050811;
+  --tarjeta-bg: rgba(13, 19, 36, 0.9);
+  --dorado: #fbbf24;
+  --dorado-brillo: rgba(251, 191, 36, 0.45);
+  --violeta-suave: #c084fc;
+  --rosa-tierno: #f472b6;
+  --texto-blanco: #f8fafc;
+  --texto-gris: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 25%, #161b33 0%, var(--bg-noche) 95%);
+  background-color: var(--bg-noche);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+  color: var(--texto-blanco);
+  position: relative;
+}
+
+/* Lienzo de partículas doradas y estrellas */
+#canvas-suerte {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Contenedor principal */
+.contenedor-tarjeta {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 460px;
+  background: var(--tarjeta-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 28px;
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85),
+              0 0 30px rgba(251, 191, 36, 0.15);
+}
+
+/* Etiqueta superior */
+.etiqueta-fecha {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: var(--dorado);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  font-family: -apple-system, sans-serif;
+}
+
+/* =========================================
+   PANTALLA 1: EL GATITO NEGRO
+   ========================================= */
+.gato-contenedor {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  background: radial-gradient(circle, #1e2542 0%, #090d1a 100%);
+  border-radius: 50%;
+  border: 2px solid var(--dorado);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 25px var(--dorado-brillo);
+  animation: flotarGato 3.5s ease-in-out infinite;
+}
+
+@keyframes flotarGato {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.emoji-gato {
+  font-size: 4.2rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+
+h1 {
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.texto-intro {
+  color: var(--texto-gris);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin-bottom: 26px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.btn-suerte {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #090d1a;
+  border: none;
+  padding: 15px 28px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  font-family: -apple-system, sans-serif;
+}
+
+.btn-suerte:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.6);
+}
+
+/* =========================================
+   PANTALLA 2: MÚSICA, GALERÍA Y MENSAJE
+   ========================================= */
+.contenido-sorpresa {
+  display: none;
+  animation: aparecerSuave 0.6s ease forwards;
+}
+
+@keyframes aparecerSuave {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.barra-musica {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.info-cancion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--dorado);
+  font-weight: 600;
+  font-family: -apple-system, sans-serif;
+}
+
+.ecualizador {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+
+.barra-eq {
+  width: 3px;
+  background: var(--dorado);
+  border-radius: 2px;
+  animation: ritmo 0.8s infinite ease-in-out;
+}
+
+.barra-eq:nth-child(2) { animation-delay: 0.2s; }
+.barra-eq:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes ritmo {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+.btn-audio-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Visor de Fotos */
+.visor-fotos {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  border-radius: 18px;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--dorado), var(--rosa-tierno), var(--violeta-suave));
+  margin-bottom: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.visor-fotos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.controles-fotos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.btn-foto {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btn-foto:hover {
+  background: rgba(251, 191, 36, 0.25);
+}
+
+.indicador-foto {
+  font-size: 0.82rem;
+  color: var(--texto-gris);
+  font-family: -apple-system, sans-serif;
+}
+
+/* Dedicatoria */
+.caja-dedicatoria {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.caja-dedicatoria h2 {
+  font-size: 1.35rem;
+  color: var(--dorado);
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.caja-dedicatoria p {
+  font-size: 0.95rem;
+  color: var(--texto-gris);
+  line-height: 1.65;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* =========================================
+   TULIPANES FLOTANTES DE FONDO
+   ========================================= */
+.tulipan-flotante {
+  position: fixed;
+  width: 42px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: flotarTulipan 15s linear infinite, balanceo 4s ease-in-out infinite;
+}
+
+@keyframes flotarTulipan {
+  0% {
+    transform: translateY(105vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(-15vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes balanceo {
+  0%, 100% { margin-left: 0; }
+  50% { margin-left: 20px; }
+}

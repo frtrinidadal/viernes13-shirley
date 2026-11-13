@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viernes 13 de Buena Suerte 🐈‍⬛✨</title>
+  <link rel="stylesheet" href="estilo.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Fondo de destellos dorados -->
+  <canvas id="canvas-suerte"></canvas>
+
+  <!-- Archivo de audio local -->
+  <audio id="cancionViernes13" src="viernes13.mp3" loop></audio>
+
+  <main class="contenedor-tarjeta">
+    <div class="etiqueta-fecha">✦ Viernes 13 · Edición Especial ✦</div>
+
+    <!-- PANTALLA 1: BIENVENIDA CON EL GATITO -->
+    <section id="pantallaInicio">
+      <div class="gato-contenedor">
+        <span class="emoji-gato">🐈‍⬛</span>
+      </div>
+      <h1>Dicen que hoy es día de mala suerte...</h1>
+      <p class="texto-intro">
+        Pero este gatito negro trae un mensaje especial para ti, Shirley. Toca el botón para cambiar las reglas del Viernes 13.
+      </p>
+      <button class="btn-suerte" onclick="activarSuerte()">
+        🐾 Tocar para quitar la mala suerte
+      </button>
+    </section>
+
+    <!-- PANTALLA 2: MÚSICA, GALERÍA Y MENSAJE -->
+    <section class="contenido-sorpresa" id="pantallaSorpresa">
+      
+      <!-- Mini reproductor -->
+      <div class="barra-musica">
+        <div class="info-cancion">
+          <div class="ecualizador" id="ecualizador">
+            <span class="barra-eq"></span>
+            <span class="barra-eq"></span>
+            <span class="barra-eq"></span>
+          </div>
+          <span>Sonando: Viernes 13 🎶</span>
+        </div>
+        <button class="btn-audio-toggle" id="btnPausaPlay" onclick="alternarMusica()" title="Pausar/Reanudar">
+          ⏸️
+        </button>
+      </div>
+
+      <!-- Visor de fotos -->
+      <div class="visor-fotos">
+        <img id="imagenActual" src="foto1.jpg" alt="Recuerdo especial" />
+      </div>
+
+      <!-- Controles para pasar las fotos -->
+      <div class="controles-fotos">
+        <button class="btn-foto" onclick="cambiarFoto(-1)">◀</button>
+        <span class="indicador-foto" id="contadorFotos">Foto 1 de 3</span>
+        <button class="btn-foto" onclick="cambiarFoto(1)">▶</button>
+      </div>
+
+      <!-- Mensaje personal -->
+      <div class="caja-dedicatoria">
+        <h2>Para ti, Shirley ✨</h2>
+        <p id="fraseFoto">
+          «Sé que estas semanas han sido pesadas y estuviste ajetreada con tus prácticas, así que te mereces una pausa. Para el mundo hoy es Viernes 13; para mí es la excusa perfecta para recordarte lo increíble que eres y sacarte una sonrisa en medio de la semana. ✨»
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
